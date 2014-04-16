@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CEF4E9C718F7E28700A77413 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF4E9C618F7E28700A77413 /* Foundation.framework */; };
+		CEF4E9C918F7E28700A77413 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF4E9C818F7E28700A77413 /* CoreGraphics.framework */; };
+		CEF4E9CB18F7E28700A77413 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF4E9CA18F7E28700A77413 /* UIKit.framework */; };
+		CEF4E9D118F7E28700A77413 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEF4E9CF18F7E28700A77413 /* InfoPlist.strings */; };
+		CEF4E9D318F7E28700A77413 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4E9D218F7E28700A77413 /* main.m */; };
+		CEF4E9D718F7E28700A77413 /* BjitAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4E9D618F7E28700A77413 /* BjitAppDelegate.m */; };
+		CEF4E9D918F7E28700A77413 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF4E9D818F7E28700A77413 /* Images.xcassets */; };
+		CEF4E9E018F7E28700A77413 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF4E9DF18F7E28700A77413 /* XCTest.framework */; };
+		CEF4E9E118F7E28700A77413 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF4E9C618F7E28700A77413 /* Foundation.framework */; };
+		CEF4E9E218F7E28700A77413 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF4E9CA18F7E28700A77413 /* UIKit.framework */; };
+		CEF4E9EA18F7E28700A77413 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEF4E9E818F7E28700A77413 /* InfoPlist.strings */; };
+		CEF4E9EC18F7E28700A77413 /* SokobanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF4E9EB18F7E28700A77413 /* SokobanTests.m */; };
+		CEFC328D18FCF7AB0037C1BE /* BjitViewControllerRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC328C18FCF7AB0037C1BE /* BjitViewControllerRoot.m */; };
+		CEFC329318FCFA9A0037C1BE /* BjitViewControllerStart.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC329218FCFA9A0037C1BE /* BjitViewControllerStart.m */; };
+		CEFC329718FD03E20037C1BE /* BjitUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFC329618FD03E20037C1BE /* BjitUtil.m */; };
+		CEFE5E3E18FE5F650010A9A8 /* diamond_on_floor_96.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3318FE5F650010A9A8 /* diamond_on_floor_96.png */; };
+		CEFE5E3F18FE5F650010A9A8 /* diamond_on_target_96.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3418FE5F650010A9A8 /* diamond_on_target_96.png */; };
+		CEFE5E4018FE5F650010A9A8 /* floor_96.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3518FE5F650010A9A8 /* floor_96.png */; };
+		CEFE5E4118FE5F650010A9A8 /* ic_menu_back.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3618FE5F650010A9A8 /* ic_menu_back.png */; };
+		CEFE5E4218FE5F650010A9A8 /* ic_menu_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3718FE5F650010A9A8 /* ic_menu_refresh.png */; };
+		CEFE5E4318FE5F650010A9A8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3818FE5F650010A9A8 /* icon.png */; };
+		CEFE5E4418FE5F650010A9A8 /* man_on_floor_96.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3918FE5F650010A9A8 /* man_on_floor_96.png */; };
+		CEFE5E4518FE5F650010A9A8 /* man_on_target_96.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3A18FE5F650010A9A8 /* man_on_target_96.png */; };
+		CEFE5E4618FE5F650010A9A8 /* outside_96.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3B18FE5F650010A9A8 /* outside_96.png */; };
+		CEFE5E4718FE5F650010A9A8 /* target_96.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3C18FE5F650010A9A8 /* target_96.png */; };
+		CEFE5E4818FE5F650010A9A8 /* wall_96.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E3D18FE5F650010A9A8 /* wall_96.png */; };
+		CEFE5E4A18FE5FFE0010A9A8 /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E4918FE5FFE0010A9A8 /* icon57x57.png */; };
+		CEFE5E4C18FE603D0010A9A8 /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E4B18FE603D0010A9A8 /* icon114x114.png */; };
+		CEFE5E4E18FE60680010A9A8 /* icon120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E4D18FE60680010A9A8 /* icon120x120.png */; };
+		CEFE5E5018FE60AE0010A9A8 /* icon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E4F18FE60AE0010A9A8 /* icon29x29.png */; };
+		CEFE5E5218FE60E60010A9A8 /* icon58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E5118FE60E60010A9A8 /* icon58x58.png */; };
+		CEFE5E5418FE610E0010A9A8 /* icon80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFE5E5318FE610E0010A9A8 /* icon80x80.png */; };
+		CEFE5E5918FE65830010A9A8 /* BjitViewControllerGame.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5E5818FE65830010A9A8 /* BjitViewControllerGame.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CEF4E9E318F7E28700A77413 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEF4E9BB18F7E28700A77413 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEF4E9C218F7E28700A77413;
+			remoteInfo = Sokoban;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CEF4E9C318F7E28700A77413 /* Sokoban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sokoban.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEF4E9C618F7E28700A77413 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CEF4E9C818F7E28700A77413 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CEF4E9CA18F7E28700A77413 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CEF4E9CE18F7E28700A77413 /* Sokoban-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Sokoban-Info.plist"; sourceTree = "<group>"; };
+		CEF4E9D018F7E28700A77413 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CEF4E9D218F7E28700A77413 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CEF4E9D418F7E28700A77413 /* Sokoban-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sokoban-Prefix.pch"; sourceTree = "<group>"; };
+		CEF4E9D518F7E28700A77413 /* BjitAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BjitAppDelegate.h; sourceTree = "<group>"; };
+		CEF4E9D618F7E28700A77413 /* BjitAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BjitAppDelegate.m; sourceTree = "<group>"; };
+		CEF4E9D818F7E28700A77413 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CEF4E9DE18F7E28700A77413 /* SokobanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SokobanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEF4E9DF18F7E28700A77413 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CEF4E9E718F7E28700A77413 /* SokobanTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SokobanTests-Info.plist"; sourceTree = "<group>"; };
+		CEF4E9E918F7E28700A77413 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CEF4E9EB18F7E28700A77413 /* SokobanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SokobanTests.m; sourceTree = "<group>"; };
+		CEFC328B18FCF7AB0037C1BE /* BjitViewControllerRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BjitViewControllerRoot.h; path = Sokoban/Controller/BjitViewControllerRoot.h; sourceTree = "<group>"; };
+		CEFC328C18FCF7AB0037C1BE /* BjitViewControllerRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BjitViewControllerRoot.m; path = Sokoban/Controller/BjitViewControllerRoot.m; sourceTree = "<group>"; };
+		CEFC329118FCFA9A0037C1BE /* BjitViewControllerStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BjitViewControllerStart.h; path = Sokoban/Controller/BjitViewControllerStart.h; sourceTree = "<group>"; };
+		CEFC329218FCFA9A0037C1BE /* BjitViewControllerStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BjitViewControllerStart.m; path = Sokoban/Controller/BjitViewControllerStart.m; sourceTree = "<group>"; };
+		CEFC329518FD03E20037C1BE /* BjitUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BjitUtil.h; path = Sokoban/Util/BjitUtil.h; sourceTree = "<group>"; };
+		CEFC329618FD03E20037C1BE /* BjitUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BjitUtil.m; path = Sokoban/Util/BjitUtil.m; sourceTree = "<group>"; };
+		CEFE5E3318FE5F650010A9A8 /* diamond_on_floor_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diamond_on_floor_96.png; path = Sokoban/Resources/diamond_on_floor_96.png; sourceTree = "<group>"; };
+		CEFE5E3418FE5F650010A9A8 /* diamond_on_target_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diamond_on_target_96.png; path = Sokoban/Resources/diamond_on_target_96.png; sourceTree = "<group>"; };
+		CEFE5E3518FE5F650010A9A8 /* floor_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = floor_96.png; path = Sokoban/Resources/floor_96.png; sourceTree = "<group>"; };
+		CEFE5E3618FE5F650010A9A8 /* ic_menu_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_menu_back.png; path = Sokoban/Resources/ic_menu_back.png; sourceTree = "<group>"; };
+		CEFE5E3718FE5F650010A9A8 /* ic_menu_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_menu_refresh.png; path = Sokoban/Resources/ic_menu_refresh.png; sourceTree = "<group>"; };
+		CEFE5E3818FE5F650010A9A8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Sokoban/Resources/icon.png; sourceTree = "<group>"; };
+		CEFE5E3918FE5F650010A9A8 /* man_on_floor_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = man_on_floor_96.png; path = Sokoban/Resources/man_on_floor_96.png; sourceTree = "<group>"; };
+		CEFE5E3A18FE5F650010A9A8 /* man_on_target_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = man_on_target_96.png; path = Sokoban/Resources/man_on_target_96.png; sourceTree = "<group>"; };
+		CEFE5E3B18FE5F650010A9A8 /* outside_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = outside_96.png; path = Sokoban/Resources/outside_96.png; sourceTree = "<group>"; };
+		CEFE5E3C18FE5F650010A9A8 /* target_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = target_96.png; path = Sokoban/Resources/target_96.png; sourceTree = "<group>"; };
+		CEFE5E3D18FE5F650010A9A8 /* wall_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wall_96.png; path = Sokoban/Resources/wall_96.png; sourceTree = "<group>"; };
+		CEFE5E4918FE5FFE0010A9A8 /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon57x57.png; path = Sokoban/Resources/icon57x57.png; sourceTree = "<group>"; };
+		CEFE5E4B18FE603D0010A9A8 /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114x114.png; path = Sokoban/Resources/icon114x114.png; sourceTree = "<group>"; };
+		CEFE5E4D18FE60680010A9A8 /* icon120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon120x120.png; path = Sokoban/Resources/icon120x120.png; sourceTree = "<group>"; };
+		CEFE5E4F18FE60AE0010A9A8 /* icon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon29x29.png; path = Sokoban/Resources/icon29x29.png; sourceTree = "<group>"; };
+		CEFE5E5118FE60E60010A9A8 /* icon58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon58x58.png; path = Sokoban/Resources/icon58x58.png; sourceTree = "<group>"; };
+		CEFE5E5318FE610E0010A9A8 /* icon80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon80x80.png; path = Sokoban/Resources/icon80x80.png; sourceTree = "<group>"; };
+		CEFE5E5718FE65830010A9A8 /* BjitViewControllerGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BjitViewControllerGame.h; path = Sokoban/Controller/BjitViewControllerGame.h; sourceTree = "<group>"; };
+		CEFE5E5818FE65830010A9A8 /* BjitViewControllerGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BjitViewControllerGame.m; path = Sokoban/Controller/BjitViewControllerGame.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEF4E9C018F7E28700A77413 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEF4E9C918F7E28700A77413 /* CoreGraphics.framework in Frameworks */,
+				CEF4E9CB18F7E28700A77413 /* UIKit.framework in Frameworks */,
+				CEF4E9C718F7E28700A77413 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEF4E9DB18F7E28700A77413 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEF4E9E018F7E28700A77413 /* XCTest.framework in Frameworks */,
+				CEF4E9E218F7E28700A77413 /* UIKit.framework in Frameworks */,
+				CEF4E9E118F7E28700A77413 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CEF4E9BA18F7E28700A77413 = {
+			isa = PBXGroup;
+			children = (
+				CEFE5E3118FE59DB0010A9A8 /* Resources */,
+				CEFC329418FD03B20037C1BE /* Util */,
+				CEFC328718FCEEA80037C1BE /* Controller */,
+				CEF4E9CC18F7E28700A77413 /* Sokoban */,
+				CEF4E9E518F7E28700A77413 /* SokobanTests */,
+				CEF4E9C518F7E28700A77413 /* Frameworks */,
+				CEF4E9C418F7E28700A77413 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CEF4E9C418F7E28700A77413 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEF4E9C318F7E28700A77413 /* Sokoban.app */,
+				CEF4E9DE18F7E28700A77413 /* SokobanTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEF4E9C518F7E28700A77413 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEF4E9C618F7E28700A77413 /* Foundation.framework */,
+				CEF4E9C818F7E28700A77413 /* CoreGraphics.framework */,
+				CEF4E9CA18F7E28700A77413 /* UIKit.framework */,
+				CEF4E9DF18F7E28700A77413 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CEF4E9CC18F7E28700A77413 /* Sokoban */ = {
+			isa = PBXGroup;
+			children = (
+				CEF4E9D518F7E28700A77413 /* BjitAppDelegate.h */,
+				CEF4E9D618F7E28700A77413 /* BjitAppDelegate.m */,
+				CEF4E9D818F7E28700A77413 /* Images.xcassets */,
+				CEF4E9CD18F7E28700A77413 /* Supporting Files */,
+			);
+			path = Sokoban;
+			sourceTree = "<group>";
+		};
+		CEF4E9CD18F7E28700A77413 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CEF4E9CE18F7E28700A77413 /* Sokoban-Info.plist */,
+				CEF4E9CF18F7E28700A77413 /* InfoPlist.strings */,
+				CEF4E9D218F7E28700A77413 /* main.m */,
+				CEF4E9D418F7E28700A77413 /* Sokoban-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEF4E9E518F7E28700A77413 /* SokobanTests */ = {
+			isa = PBXGroup;
+			children = (
+				CEF4E9EB18F7E28700A77413 /* SokobanTests.m */,
+				CEF4E9E618F7E28700A77413 /* Supporting Files */,
+			);
+			path = SokobanTests;
+			sourceTree = "<group>";
+		};
+		CEF4E9E618F7E28700A77413 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CEF4E9E718F7E28700A77413 /* SokobanTests-Info.plist */,
+				CEF4E9E818F7E28700A77413 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEFC328718FCEEA80037C1BE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CEFC328B18FCF7AB0037C1BE /* BjitViewControllerRoot.h */,
+				CEFC328C18FCF7AB0037C1BE /* BjitViewControllerRoot.m */,
+				CEFC329118FCFA9A0037C1BE /* BjitViewControllerStart.h */,
+				CEFC329218FCFA9A0037C1BE /* BjitViewControllerStart.m */,
+				CEFE5E5718FE65830010A9A8 /* BjitViewControllerGame.h */,
+				CEFE5E5818FE65830010A9A8 /* BjitViewControllerGame.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		CEFC329418FD03B20037C1BE /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				CEFC329518FD03E20037C1BE /* BjitUtil.h */,
+				CEFC329618FD03E20037C1BE /* BjitUtil.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		CEFE5E3118FE59DB0010A9A8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CEFE5E5318FE610E0010A9A8 /* icon80x80.png */,
+				CEFE5E5118FE60E60010A9A8 /* icon58x58.png */,
+				CEFE5E4F18FE60AE0010A9A8 /* icon29x29.png */,
+				CEFE5E4D18FE60680010A9A8 /* icon120x120.png */,
+				CEFE5E4B18FE603D0010A9A8 /* icon114x114.png */,
+				CEFE5E4918FE5FFE0010A9A8 /* icon57x57.png */,
+				CEFE5E3318FE5F650010A9A8 /* diamond_on_floor_96.png */,
+				CEFE5E3418FE5F650010A9A8 /* diamond_on_target_96.png */,
+				CEFE5E3518FE5F650010A9A8 /* floor_96.png */,
+				CEFE5E3618FE5F650010A9A8 /* ic_menu_back.png */,
+				CEFE5E3718FE5F650010A9A8 /* ic_menu_refresh.png */,
+				CEFE5E3818FE5F650010A9A8 /* icon.png */,
+				CEFE5E3918FE5F650010A9A8 /* man_on_floor_96.png */,
+				CEFE5E3A18FE5F650010A9A8 /* man_on_target_96.png */,
+				CEFE5E3B18FE5F650010A9A8 /* outside_96.png */,
+				CEFE5E3C18FE5F650010A9A8 /* target_96.png */,
+				CEFE5E3D18FE5F650010A9A8 /* wall_96.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CEF4E9C218F7E28700A77413 /* Sokoban */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEF4E9EF18F7E28700A77413 /* Build configuration list for PBXNativeTarget "Sokoban" */;
+			buildPhases = (
+				CEF4E9BF18F7E28700A77413 /* Sources */,
+				CEF4E9C018F7E28700A77413 /* Frameworks */,
+				CEF4E9C118F7E28700A77413 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sokoban;
+			productName = Sokoban;
+			productReference = CEF4E9C318F7E28700A77413 /* Sokoban.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CEF4E9DD18F7E28700A77413 /* SokobanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEF4E9F218F7E28700A77413 /* Build configuration list for PBXNativeTarget "SokobanTests" */;
+			buildPhases = (
+				CEF4E9DA18F7E28700A77413 /* Sources */,
+				CEF4E9DB18F7E28700A77413 /* Frameworks */,
+				CEF4E9DC18F7E28700A77413 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEF4E9E418F7E28700A77413 /* PBXTargetDependency */,
+			);
+			name = SokobanTests;
+			productName = SokobanTests;
+			productReference = CEF4E9DE18F7E28700A77413 /* SokobanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CEF4E9BB18F7E28700A77413 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Bjit;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Bjit;
+				TargetAttributes = {
+					CEF4E9DD18F7E28700A77413 = {
+						TestTargetID = CEF4E9C218F7E28700A77413;
+					};
+				};
+			};
+			buildConfigurationList = CEF4E9BE18F7E28700A77413 /* Build configuration list for PBXProject "Sokoban" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CEF4E9BA18F7E28700A77413;
+			productRefGroup = CEF4E9C418F7E28700A77413 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CEF4E9C218F7E28700A77413 /* Sokoban */,
+				CEF4E9DD18F7E28700A77413 /* SokobanTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEF4E9C118F7E28700A77413 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEF4E9D118F7E28700A77413 /* InfoPlist.strings in Resources */,
+				CEFE5E4218FE5F650010A9A8 /* ic_menu_refresh.png in Resources */,
+				CEFE5E4818FE5F650010A9A8 /* wall_96.png in Resources */,
+				CEFE5E3E18FE5F650010A9A8 /* diamond_on_floor_96.png in Resources */,
+				CEFE5E5018FE60AE0010A9A8 /* icon29x29.png in Resources */,
+				CEFE5E4018FE5F650010A9A8 /* floor_96.png in Resources */,
+				CEFE5E4318FE5F650010A9A8 /* icon.png in Resources */,
+				CEFE5E4C18FE603D0010A9A8 /* icon114x114.png in Resources */,
+				CEFE5E4718FE5F650010A9A8 /* target_96.png in Resources */,
+				CEFE5E5218FE60E60010A9A8 /* icon58x58.png in Resources */,
+				CEF4E9D918F7E28700A77413 /* Images.xcassets in Resources */,
+				CEFE5E4E18FE60680010A9A8 /* icon120x120.png in Resources */,
+				CEFE5E5418FE610E0010A9A8 /* icon80x80.png in Resources */,
+				CEFE5E3F18FE5F650010A9A8 /* diamond_on_target_96.png in Resources */,
+				CEFE5E4518FE5F650010A9A8 /* man_on_target_96.png in Resources */,
+				CEFE5E4118FE5F650010A9A8 /* ic_menu_back.png in Resources */,
+				CEFE5E4A18FE5FFE0010A9A8 /* icon57x57.png in Resources */,
+				CEFE5E4418FE5F650010A9A8 /* man_on_floor_96.png in Resources */,
+				CEFE5E4618FE5F650010A9A8 /* outside_96.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEF4E9DC18F7E28700A77413 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEF4E9EA18F7E28700A77413 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CEF4E9BF18F7E28700A77413 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEFC329718FD03E20037C1BE /* BjitUtil.m in Sources */,
+				CEFE5E5918FE65830010A9A8 /* BjitViewControllerGame.m in Sources */,
+				CEF4E9D318F7E28700A77413 /* main.m in Sources */,
+				CEF4E9D718F7E28700A77413 /* BjitAppDelegate.m in Sources */,
+				CEFC329318FCFA9A0037C1BE /* BjitViewControllerStart.m in Sources */,
+				CEFC328D18FCF7AB0037C1BE /* BjitViewControllerRoot.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEF4E9DA18F7E28700A77413 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEF4E9EC18F7E28700A77413 /* SokobanTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEF4E9E418F7E28700A77413 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEF4E9C218F7E28700A77413 /* Sokoban */;
+			targetProxy = CEF4E9E318F7E28700A77413 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CEF4E9CF18F7E28700A77413 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEF4E9D018F7E28700A77413 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CEF4E9E818F7E28700A77413 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEF4E9E918F7E28700A77413 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CEF4E9ED18F7E28700A77413 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: kojiro katagiri (HJG5WJ66YJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: kojiro katagiri (HJG5WJ66YJ)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CEF4E9EE18F7E28700A77413 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: kojiro katagiri (HJG5WJ66YJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: kojiro katagiri (HJG5WJ66YJ)";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CEF4E9F018F7E28700A77413 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Sokoban/Sokoban-Prefix.pch";
+				INFOPLIST_FILE = "Sokoban/Sokoban-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CEF4E9F118F7E28700A77413 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Sokoban/Sokoban-Prefix.pch";
+				INFOPLIST_FILE = "Sokoban/Sokoban-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CEF4E9F318F7E28700A77413 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Sokoban.app/Sokoban";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Sokoban/Sokoban-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SokobanTests/SokobanTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CEF4E9F418F7E28700A77413 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Sokoban.app/Sokoban";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Sokoban/Sokoban-Prefix.pch";
+				INFOPLIST_FILE = "SokobanTests/SokobanTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CEF4E9BE18F7E28700A77413 /* Build configuration list for PBXProject "Sokoban" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEF4E9ED18F7E28700A77413 /* Debug */,
+				CEF4E9EE18F7E28700A77413 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEF4E9EF18F7E28700A77413 /* Build configuration list for PBXNativeTarget "Sokoban" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEF4E9F018F7E28700A77413 /* Debug */,
+				CEF4E9F118F7E28700A77413 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEF4E9F218F7E28700A77413 /* Build configuration list for PBXNativeTarget "SokobanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEF4E9F318F7E28700A77413 /* Debug */,
+				CEF4E9F418F7E28700A77413 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CEF4E9BB18F7E28700A77413 /* Project object */;
+}
