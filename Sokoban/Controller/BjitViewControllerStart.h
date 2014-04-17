@@ -8,12 +8,8 @@
 
 #import "BjitViewControllerRoot.h"
 
-@class BjitViewControllerGame;
-
 @interface BjitViewControllerStart : BjitViewControllerRoot
 {
 }
-
-@property (strong, nonatomic) BjitViewControllerGame *gameController;
 
 @end

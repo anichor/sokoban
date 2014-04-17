@@ -1,22 +1,26 @@
 //
-//  BjitViewControllerGame.m
+//  BjitNavigatorRoot.m
 //  Sokoban
 //
-//  Created by USER on 2014/04/16.
+//  Created by USER on 2014/04/17.
 //  Copyright (c) 2014年 Bjit. All rights reserved.
 //
 
+// TODO Implement without using Arc
+
+#import "BjitNavigatorRoot.h"
+#import "BjitViewControllerRoot.h"
+#import "BjitViewControllerStart.h"
 #import "BjitViewControllerGame.h"
-#import "BjitViewGame.h"
 #import "BjitUtil.h"
 
-@interface BjitViewControllerGame ()
+@interface BjitNavigatorRoot ()
 
 @end
 
-@implementation BjitViewControllerGame
+@implementation BjitNavigatorRoot
 
-@synthesize gameIndex;
+@synthesize controller;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,18 +28,6 @@
     if (self) {
         // Custom initialization
     }
-
-    return self;
-}
-
-- (id)init:(NSInteger)index
-{
-    self = [super init];
-    self.gameIndex = index;
-    // TODO Save to UserDefault
-    BjitViewGame *view = [[BjitViewGame alloc] init:index:(NSObject<BjitProtocolAlert> *)self];
-    [self.view addSubview:view];
-
     return self;
 }
 
@@ -51,18 +43,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)showAlert:(NSInteger) id
+- (id)init:(NSInteger) controllerId
 {
-    NSMutableArray *buttons = [[NSMutableArray alloc] init];
-    NSMutableArray *ids = [[NSMutableArray alloc] init];
-    switch (id) {
-        case DIALOG_START:
+    self = [super initWithRootViewController:[[BjitViewControllerStart alloc] init]];
+    return self;
+}
+
+- (void)showController:(NSInteger) controllerId
+{
+    switch (controllerId) {
+        case CONTROLLER_START:
+            [self pushViewController:[[BjitViewControllerGame alloc] init] animated:NO];
+            break;
+        case CONTROLLER_GAME:
+            [self pushViewController:[[BjitViewControllerStart alloc] init] animated:NO];
             break;
         default:
             break;
     }
 }
-
 /*
 #pragma mark - Navigation
 

@@ -7,16 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol BjitProtocolAlert <NSObject>
-
-@optional
-- (void)showAlert:(NSInteger) id;
-- (void)hideAlert:(NSInteger) id;
-
-@required
-
-@end
+#import "BjitProtocolAlert.h"
 
 @interface BjitViewControllerRoot : UIViewController <UIAlertViewDelegate, BjitProtocolAlert>
 {

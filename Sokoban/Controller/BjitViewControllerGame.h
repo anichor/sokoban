@@ -9,5 +9,12 @@
 #import "BjitViewControllerRoot.h"
 
 @interface BjitViewControllerGame : BjitViewControllerRoot
+{
+}
+
+@property (nonatomic, assign) NSInteger gameIndex;
+@property (nonatomic, assign) NSInteger gameLevel;
+
+- (id)init:(NSInteger)index;
 
 @end

@@ -8,7 +8,9 @@
 
 #import "BjitViewControllerRoot.h"
 #import "BjitUtil.h"
+#import "BjitViewControllerGame.h"
 
+// It is not suppose to be here
 #define SCALE_FACTOR_STEPPER 1.6
 #define POINT_Y_STEPPER_START 50
 #define HEIGHT_LABEL 40
@@ -83,6 +85,8 @@
     [alert show];
 }
 
+// TODO Fix design error
+// It is not suppose to be here
 - (void)showAlert:(NSString *)title :(NSString *)message :(NSMutableArray *)buttons :(NSMutableArray *)ids :(NSInteger)stepStart :(NSInteger)stepEnd
 {
     if (!alert) {
@@ -107,13 +111,13 @@
     stepper.continuous = NO;
     stepper.tintColor = [UIColor colorWithRed:0.0f green:0.0f blue:1.0 alpha:0.5f];
     [stepper addTarget:self
-                       action:@selector(stepperAction:)
+                       action:@selector(buttonAction:)
              forControlEvents:UIControlEventValueChanged];
     [alert addSubview:stepper];
 
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y + POINT_Y_STEPPER_START, stepper.frame.size.width * SCALE_FACTOR_STEPPER, HEIGHT_LABEL)];
     label.textAlignment = NSTextAlignmentCenter;
-    // TODO get last non fixed game
+    // TODO get last non fixed game from UserDefault
     [label setText:[NSString stringWithFormat:@"%d", 1]];
     label.tag = TAG_LABEL;
     [alert addSubview:label];
@@ -127,23 +131,62 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)stepperAction:(id)sender
+// It is not suppose to be here
+- (void)buttonAction:(id)sender
 {
-    UIStepper *stepper = sender;
-    NSInteger gameIndex = stepper.value;
-    NSArray *views = stepper.superview.subviews;
-    NSInteger count = views.count;
-    for (NSInteger i = 0; i < count; i++) {
-        UIView *view = [views objectAtIndex:i];
-        if (view.tag == TAG_LABEL) {
-            UILabel *label = (UILabel *)view;
-            [label setText:[NSString stringWithFormat:@"%d", gameIndex]];
-            break;
-        }
-        if ([view isKindOfClass:[UILabel class]]) {
+    UIView *senderView = sender;
+
+    if ([senderView isKindOfClass:[UIStepper class]]) {
+        UIStepper *stepper = sender;
+        NSInteger gameIndex = stepper.value;
+        NSArray *views = stepper.superview.subviews;
+        NSInteger count = views.count;
+        for (NSInteger i = 0; i < count; i++) {
+            UIView *view = [views objectAtIndex:i];
+            if (view.tag == TAG_LABEL) {
+                UILabel *label = (UILabel *)view;
+                [label setText:[NSString stringWithFormat:@"%ld", (long)gameIndex]];
+                break;
+            }
         }
     }
 }
+
+// It is not suppose to be here
+- (NSInteger)getGameIndex:(NSInteger)stepEnd
+{
+    NSInteger gameIndex = 0;
+    if (alert) {
+        NSArray *views = alert.subviews;
+        NSInteger count = views.count;
+        for (NSInteger i = 0; i < count; i++) {
+            UIView *view = [views objectAtIndex:i];
+            if (view.tag == TAG_LABEL) {
+                UILabel *label = (UILabel *)view;
+                gameIndex = label.text.integerValue;
+                break;
+            }
+        }
+    }
+
+    switch (stepEnd) {
+        case COUNT_MICROBAN:
+            break;
+        case COUNT_ORIGINAL:
+            gameIndex += COUNT_MICROBAN;
+            break;
+        case COUNT_MAS_SASQUATCH:
+            gameIndex += COUNT_ORIGINAL;
+            break;
+        case COUNT_SASQUATCH:
+            gameIndex += COUNT_MAS_SASQUATCH;
+            break;
+        default:
+            break;
+    }
+    return gameIndex;
+}
+
 /*
 #pragma mark - Navigation
 
@@ -161,41 +204,56 @@
     switch (index) {
         case ID_EXIT:
             exit(0);
-        case ID_START:
-            alert = nil;
-            [self hideAlert:ID_START];
-            break;
         case ID_OK:
             alert = nil;
             [self hideAlert:ID_OK];
-            break;
-        case ID_ABOUT:
-            alert = nil;
-            [self hideAlert:ID_ABOUT];
             break;
         case ID_CANCEL:
             alert = nil;
             [self hideAlert:ID_CANCEL];
             break;
+        case ID_START:
+            alert = nil;
+            [self hideAlert:ID_START];
+            break;
+        case ID_ABOUT:
+            alert = nil;
+            [self hideAlert:ID_ABOUT];
+            break;
+        case ID_SELECT:
+            alert = nil;
+            [self hideAlert:ID_SELECT];
+            break;
+        case ID_MICROBAN:
+            alert = nil;
+            [self hideAlert:ID_MICROBAN];
+            break;
+        case ID_ORIGINAL:
+            alert = nil;
+            [self hideAlert:ID_ORIGINAL];
+            break;
+        case ID_MAS_SASQUATCH:
+            alert = nil;
+            [self hideAlert:ID_MAS_SASQUATCH];
+            break;
+        case ID_SASQUATCH:
+            alert = nil;
+            [self hideAlert:ID_SASQUATCH];
+            break;
+        case ID_MICROBAN_INDEX:
+        case ID_ORIGINAL_INDEX:
+        case ID_MAS_SASQUATCH_INDEX:
+        case ID_SASQUATCH_INDEX:
+        {
+            NSInteger gameIndex = [self getGameIndex:index];
+            alert = nil;
+            BjitViewControllerGame *gameController = [[BjitViewControllerGame alloc] init:gameIndex];
+            [self.navigationController pushViewController:gameController animated:NO];
+        }
+            break;
         case ID_SETTINGS:
             alert = nil;
             [self hideAlert:ID_SETTINGS];
-            break;
-        case COUNT_MICROBAN:
-            alert = nil;
-            [self hideAlert:COUNT_MICROBAN];
-            break;
-        case COUNT_ORIGINAL:
-            alert = nil;
-            [self hideAlert:COUNT_ORIGINAL];
-            break;
-        case COUNT_MAS_SASQUATCH:
-            alert = nil;
-            [self hideAlert:COUNT_MAS_SASQUATCH];
-            break;
-        case COUNT_SASQUATCH:
-            alert = nil;
-            [self hideAlert:COUNT_SASQUATCH];
             break;
         default:
             break;

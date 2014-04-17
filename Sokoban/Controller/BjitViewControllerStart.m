@@ -8,7 +8,6 @@
 
 #import "BjitViewControllerStart.h"
 #import "BjitUtil.h"
-#import "BjitViewControllerGame.h"
 
 @interface BjitViewControllerStart ()
 
@@ -43,7 +42,7 @@
             [buttons addObject:@"Settings"];
             [buttons addObject:@"About"];
             [buttons addObject:@"Exit"];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_START]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_SELECT]];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_SETTINGS]];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_ABOUT]];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_EXIT]];
@@ -53,7 +52,7 @@
         case DIALOG_ABOUT:
         {
             [buttons addObject:@"OK"];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_OK]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
             [super showAlert:@"Sokoban 0.01":@"This is porting of Sokoban from Android by Bjit Inc.\nAndroid version is developed by Mobile Pearls\n\"http://mobilepearls.com\"":buttons:ids];
         }
             break;
@@ -64,11 +63,11 @@
             [buttons addObject:@"Mas Sasquatch - 1/50"];
             [buttons addObject:@"Sasquatch - 1/99"];
             [buttons addObject:@"Back"];
-            [ids addObject:[NSString stringWithFormat:@"%d", COUNT_MICROBAN]];
-            [ids addObject:[NSString stringWithFormat:@"%d", COUNT_ORIGINAL]];
-            [ids addObject:[NSString stringWithFormat:@"%d", COUNT_MAS_SASQUATCH]];
-            [ids addObject:[NSString stringWithFormat:@"%d", COUNT_SASQUATCH]];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_OK]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_MICROBAN]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_ORIGINAL]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_MAS_SASQUATCH]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_SASQUATCH]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
             [super showAlert:nil:@"Select Game\n":buttons:ids];
         }
             break;
@@ -76,8 +75,8 @@
         {
             [buttons addObject:@"Back"];
             [buttons addObject:@"OK"];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_OK]];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_MICROBAN]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_MICROBAN_INDEX]];
             [super showAlert:@"Select":@"\n\n\n\n\n":buttons:ids:0:COUNT_MICROBAN];
         }
             break;
@@ -85,8 +84,8 @@
         {
             [buttons addObject:@"Back"];
             [buttons addObject:@"OK"];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_OK]];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_ORIGINAL]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_ORIGINAL_INDEX]];
             [super showAlert:@"Select":@"\n\n\n\n\n":buttons:ids:COUNT_MICROBAN:COUNT_ORIGINAL];
         }
             break;
@@ -94,8 +93,8 @@
         {
             [buttons addObject:@"Back"];
             [buttons addObject:@"OK"];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_OK]];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_MAS_SASQUATCH]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_MAS_SASQUATCH_INDEX]];
             [super showAlert:@"Select":@"\n\n\n\n\n":buttons:ids:COUNT_ORIGINAL:COUNT_MAS_SASQUATCH];
         }
             break;
@@ -103,8 +102,8 @@
         {
             [buttons addObject:@"Back"];
             [buttons addObject:@"OK"];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_OK]];
-            [ids addObject:[NSString stringWithFormat:@"%d", ID_SASQUATCH]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_SASQUATCH_INDEX]];
             [super showAlert:@"Select":@"\n\n\n\n\n":buttons:ids:COUNT_MAS_SASQUATCH:COUNT_SASQUATCH];
         }
             break;
@@ -117,6 +116,8 @@
 {
     switch (id) {
         case ID_START:
+            break;
+        case ID_SELECT:
         {
             [self showAlert:DIALOG_SELECT];
         }
@@ -131,22 +132,22 @@
             [self showAlert:DIALOG_ABOUT];
         }
             break;
-        case COUNT_MICROBAN:
+        case ID_MICROBAN:
         {
             [self showAlert:DIALOG_MICROBAN];
         }
             break;
-        case COUNT_ORIGINAL:
+        case ID_ORIGINAL:
         {
             [self showAlert:DIALOG_ORIGINAL];
         }
             break;
-        case COUNT_MAS_SASQUATCH:
+        case ID_MAS_SASQUATCH:
         {
             [self showAlert:DIALOG_MAS_SASQUATCH];
         }
             break;
-        case COUNT_SASQUATCH:
+        case ID_SASQUATCH:
         {
             [self showAlert:DIALOG_SASQUATCH];
         }
