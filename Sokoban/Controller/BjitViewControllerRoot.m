@@ -118,7 +118,11 @@
             break;
         case ID_CANCEL:
             alert = nil;
-            [self hideAlert:ID_CANCEL];
+            if (self.selfControllerIndex == CONTROLLER_START) {
+                [self hideAlert:ID_CANCEL];
+            } else if (self.selfControllerIndex == CONTROLLER_GAME) {
+                [self.navigatorRoot showController:self.selfControllerIndex];
+            }
             break;
         case ID_START:
             alert = nil;
@@ -174,6 +178,12 @@
             [self hideAlert:ID_SASQUATCH_INDEX];
             alert = nil;
             [self.navigatorRoot showController:self.selfControllerIndex];
+        }
+            break;
+        case ID_GAME_LEVEL_NEW:
+        {
+            alert = nil;
+            [self hideAlert:ID_GAME_LEVEL_NEW];
         }
             break;
         case ID_SETTINGS:

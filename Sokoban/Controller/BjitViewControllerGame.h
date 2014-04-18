@@ -8,10 +8,14 @@
 
 #import "BjitViewControllerRoot.h"
 
+@class BjitViewGame;
+
 @interface BjitViewControllerGame : BjitViewControllerRoot
 {
 }
 
 @property (nonatomic, assign) NSInteger gameLevel;
+@property (nonatomic, assign) NSInteger game;
+@property (nonatomic, strong) BjitViewGame *gameView;
 
 @end

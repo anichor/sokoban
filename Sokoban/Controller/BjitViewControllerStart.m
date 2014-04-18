@@ -261,24 +261,28 @@
         {
             NSInteger gameIndex = [self getGameIndex:COUNT_MICROBAN];
             [self setUserDefaults:KEY_GAME_INDEX :gameIndex];
+            [self setUserDefaults:KEY_GAME :ID_MICROBAN];
         }
             break;
         case ID_ORIGINAL_INDEX:
         {
             NSInteger gameIndex = [self getGameIndex:COUNT_ORIGINAL];
             [self setUserDefaults:KEY_GAME_INDEX :gameIndex];
+            [self setUserDefaults:KEY_GAME :ID_ORIGINAL];
         }
             break;
         case ID_MAS_SASQUATCH_INDEX:
         {
             NSInteger gameIndex = [self getGameIndex:COUNT_MAS_SASQUATCH];
             [self setUserDefaults:KEY_GAME_INDEX :gameIndex];
+            [self setUserDefaults:KEY_GAME :ID_MAS_SASQUATCH];
         }
             break;
         case ID_SASQUATCH_INDEX:
         {
             NSInteger gameIndex = [self getGameIndex:COUNT_SASQUATCH];
             [self setUserDefaults:KEY_GAME_INDEX :gameIndex];
+            [self setUserDefaults:KEY_GAME :ID_SASQUATCH];
         }
             break;
         case ID_SETTINGS:

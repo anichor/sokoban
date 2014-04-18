@@ -57,16 +57,6 @@
 
     self.protocolAlertRoot = protocolAlert;
 
-    self.gameIndex = gameLevel;
-    self.gameLevel = [self.gameLevels getLevelMaps:self.gameIndex];
-    noOfVerticalTiles = [self.gameLevel count];
-    NSString *row = [self.gameLevel objectAtIndex:0];
-    noOfHorizontalTiles = [row length];
-
-    CGRect screenSize = [[UIScreen mainScreen] bounds];
-    self.startX = (screenSize.size.width - noOfHorizontalTiles * tileSize) / 2;
-    self.startY = (screenSize.size.height - noOfVerticalTiles * tileSize) / 2;
-    
     if (!diamondOnFloorBitmap) {
         diamondOnFloorBitmap = [UIImage imageNamed:@"diamond_on_floor_96.png"];
     }
@@ -92,7 +82,22 @@
         manOnTargetBitmap = [UIImage imageNamed:@"man_on_target_96.png"];
     }
 
+    [self initData:gameLevel];
     return self;
+}
+
+- (void)initData:(NSInteger)gameLevel
+{
+    self.gameIndex = gameLevel;
+    self.gameLevel = [self.gameLevels getLevelMaps:self.gameIndex];
+    noOfVerticalTiles = [self.gameLevel count];
+    NSString *row = [self.gameLevel objectAtIndex:0];
+    noOfHorizontalTiles = [row length];
+    
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    self.startX = (screenSize.size.width - noOfHorizontalTiles * tileSize) / 2;
+    self.startY = (screenSize.size.height - noOfVerticalTiles * tileSize) / 2;
+    
 }
 
 - (NSInteger)getVerticalTilesNo
@@ -166,9 +171,9 @@
 	if (touch)
 	{
         testInteger++;
-        if (testInteger == 10) {
+        if (testInteger > 10) {
             if (self.protocolAlertRoot) {
-                [self.protocolAlertRoot showAlert:DIALOG_MICROBAN];
+                [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
             }
         }
     }

@@ -35,5 +35,6 @@
 @property (nonatomic, assign) NSInteger testInteger;
 
 - (id)init:(NSInteger) gameLevel :(NSObject<BjitProtocolAlert> *)protocolAlert;
+- (void)initData:(NSInteger)gameLevel;
 
 @end
