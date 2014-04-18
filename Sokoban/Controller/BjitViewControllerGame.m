@@ -16,8 +16,6 @@
 
 @implementation BjitViewControllerGame
 
-@synthesize gameIndex;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -28,12 +26,12 @@
     return self;
 }
 
-- (id)init:(NSInteger)index
+- (id)init:(NSObject<BjitProtocolNavigator> *)navigator
 {
-    self = [super init];
-    self.gameIndex = index;
-    // TODO Save to UserDefault
-    BjitViewGame *view = [[BjitViewGame alloc] init:index:(NSObject<BjitProtocolAlert> *)self];
+    self = [super init:navigator];
+    self.selfControllerIndex = CONTROLLER_GAME;
+    self.gameLevel = [self getUserDefaults:KEY_GAME_INDEX];
+    BjitViewGame *view = [[BjitViewGame alloc] init:self.gameLevel:(NSObject<BjitProtocolAlert> *)self];
     [self.view addSubview:view];
 
     return self;

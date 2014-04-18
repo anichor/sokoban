@@ -10,12 +10,6 @@
 #import "BjitUtil.h"
 #import "BjitViewControllerGame.h"
 
-// It is not suppose to be here
-#define SCALE_FACTOR_STEPPER 1.6
-#define POINT_Y_STEPPER_START 50
-#define HEIGHT_LABEL 40
-#define TAG_LABEL 30
-
 @interface BjitViewControllerRoot ()
 
 @end
@@ -24,6 +18,7 @@
 
 @synthesize button_ids;
 @synthesize alert;
+@synthesize navigatorRoot;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +26,15 @@
     if (self) {
         // Custom initialization
     }
+    return self;
+}
+
+- (id)init:(NSObject<BjitProtocolNavigator> *)navigator
+{
+    self = [super init];
+    self.navigatorRoot = navigator;
+    
+
     return self;
 }
 
@@ -85,106 +89,10 @@
     [alert show];
 }
 
-// TODO Fix design error
-// It is not suppose to be here
-- (void)showAlert:(NSString *)title :(NSString *)message :(NSMutableArray *)buttons :(NSMutableArray *)ids :(NSInteger)stepStart :(NSInteger)stepEnd
-{
-    if (!alert) {
-        alert = [[UIAlertView alloc]
-                 initWithTitle:title
-                 message:message
-                 delegate:self
-                 cancelButtonTitle:nil
-                 otherButtonTitles:nil, nil];
-    }
-
-//    [alert convertPoint:alert.center fromView:alert.superview];
-//    stepper.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
-    UIStepper *stepper = [[UIStepper alloc] init];
-    stepper.transform = CGAffineTransformMakeScale(SCALE_FACTOR_STEPPER, SCALE_FACTOR_STEPPER);
-    NSInteger x = abs(([[UIScreen mainScreen] bounds].size.width - stepper.frame.size.width + stepper.frame.origin.x)) / 2;
-    NSInteger y = POINT_Y_STEPPER_START;
-    stepper.frame = CGRectMake(x, POINT_Y_STEPPER_START, 0, 0);
-    stepper.minimumValue = 1;
-    stepper.maximumValue = stepEnd - stepStart;
-    stepper.stepValue = 1;
-    stepper.continuous = NO;
-    stepper.tintColor = [UIColor colorWithRed:0.0f green:0.0f blue:1.0 alpha:0.5f];
-    [stepper addTarget:self
-                       action:@selector(buttonAction:)
-             forControlEvents:UIControlEventValueChanged];
-    [alert addSubview:stepper];
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y + POINT_Y_STEPPER_START, stepper.frame.size.width * SCALE_FACTOR_STEPPER, HEIGHT_LABEL)];
-    label.textAlignment = NSTextAlignmentCenter;
-    // TODO get last non fixed game from UserDefault
-    [label setText:[NSString stringWithFormat:@"%d", 1]];
-    label.tag = TAG_LABEL;
-    [alert addSubview:label];
-
-    [self showAlert:title :message :buttons :ids];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-// It is not suppose to be here
-- (void)buttonAction:(id)sender
-{
-    UIView *senderView = sender;
-
-    if ([senderView isKindOfClass:[UIStepper class]]) {
-        UIStepper *stepper = sender;
-        NSInteger gameIndex = stepper.value;
-        NSArray *views = stepper.superview.subviews;
-        NSInteger count = views.count;
-        for (NSInteger i = 0; i < count; i++) {
-            UIView *view = [views objectAtIndex:i];
-            if (view.tag == TAG_LABEL) {
-                UILabel *label = (UILabel *)view;
-                [label setText:[NSString stringWithFormat:@"%ld", (long)gameIndex]];
-                break;
-            }
-        }
-    }
-}
-
-// It is not suppose to be here
-- (NSInteger)getGameIndex:(NSInteger)stepEnd
-{
-    NSInteger gameIndex = 0;
-    if (alert) {
-        NSArray *views = alert.subviews;
-        NSInteger count = views.count;
-        for (NSInteger i = 0; i < count; i++) {
-            UIView *view = [views objectAtIndex:i];
-            if (view.tag == TAG_LABEL) {
-                UILabel *label = (UILabel *)view;
-                gameIndex = label.text.integerValue;
-                break;
-            }
-        }
-    }
-
-    switch (stepEnd) {
-        case COUNT_MICROBAN:
-            break;
-        case COUNT_ORIGINAL:
-            gameIndex += COUNT_MICROBAN;
-            break;
-        case COUNT_MAS_SASQUATCH:
-            gameIndex += COUNT_ORIGINAL;
-            break;
-        case COUNT_SASQUATCH:
-            gameIndex += COUNT_MAS_SASQUATCH;
-            break;
-        default:
-            break;
-    }
-    return gameIndex;
 }
 
 /*
@@ -241,14 +149,31 @@
             [self hideAlert:ID_SASQUATCH];
             break;
         case ID_MICROBAN_INDEX:
+        {
+            [self hideAlert:ID_MICROBAN_INDEX];
+            alert = nil;
+            [self.navigatorRoot showController:self.selfControllerIndex];
+        }
+            break;
         case ID_ORIGINAL_INDEX:
+        {
+            [self hideAlert:ID_ORIGINAL_INDEX];
+            alert = nil;
+            [self.navigatorRoot showController:self.selfControllerIndex];
+        }
+            break;
         case ID_MAS_SASQUATCH_INDEX:
+        {
+            [self hideAlert:ID_MAS_SASQUATCH_INDEX];
+            alert = nil;
+            [self.navigatorRoot showController:self.selfControllerIndex];
+        }
+            break;
         case ID_SASQUATCH_INDEX:
         {
-            NSInteger gameIndex = [self getGameIndex:index];
+            [self hideAlert:ID_SASQUATCH_INDEX];
             alert = nil;
-            BjitViewControllerGame *gameController = [[BjitViewControllerGame alloc] init:gameIndex];
-            [self.navigationController pushViewController:gameController animated:NO];
+            [self.navigatorRoot showController:self.selfControllerIndex];
         }
             break;
         case ID_SETTINGS:
@@ -258,6 +183,19 @@
         default:
             break;
     }
+}
+
+- (void)setUserDefaults:(NSString *)userKey :(NSInteger)userValue
+{
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    [preferences setInteger:userValue forKey:userKey];
+}
+
+- (NSInteger)getUserDefaults:(NSString *)userKey
+{
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    NSInteger value = [preferences integerForKey:userKey];
+    return value;
 }
 
 @end

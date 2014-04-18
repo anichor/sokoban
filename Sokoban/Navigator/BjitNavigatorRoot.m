@@ -20,7 +20,8 @@
 
 @implementation BjitNavigatorRoot
 
-@synthesize controller;
+@synthesize nextControllerIndex;
+@synthesize previousControllerIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,25 +44,46 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (id)init:(NSInteger) controllerId
+- (id)init
 {
-    self = [super initWithRootViewController:[[BjitViewControllerStart alloc] init]];
+    self = [super initWithRootViewController:[[UIViewController alloc] init]];
+    [self addChildViewController:[self getController:CONTROLLER_START]];
     return self;
+}
+
+- (id)getController:(NSInteger) controllerId
+{
+    switch (controllerId) {
+        case CONTROLLER_START:
+            self.nextControllerIndex = CONTROLLER_GAME;
+            self.previousControllerIndex = CONTROLLER_NONE;
+            return [[BjitViewControllerStart alloc] init:(NSObject<BjitProtocolNavigator> *) self];
+        case CONTROLLER_GAME:
+            self.nextControllerIndex = CONTROLLER_NONE;
+            self.previousControllerIndex = CONTROLLER_START;
+            return [[BjitViewControllerGame alloc] init:(NSObject<BjitProtocolNavigator> *) self];
+            break;
+        default:
+            break;
+    }
+    return nil;
 }
 
 - (void)showController:(NSInteger) controllerId
 {
     switch (controllerId) {
         case CONTROLLER_START:
-            [self pushViewController:[[BjitViewControllerGame alloc] init] animated:NO];
+            [self popToRootViewControllerAnimated:NO];
+            [self pushViewController:[self getController:self.nextControllerIndex] animated:NO];
             break;
         case CONTROLLER_GAME:
-            [self pushViewController:[[BjitViewControllerStart alloc] init] animated:NO];
+            [self pushViewController:[self getController:self.previousControllerIndex] animated:NO];
             break;
         default:
             break;
     }
 }
+
 /*
 #pragma mark - Navigation
 

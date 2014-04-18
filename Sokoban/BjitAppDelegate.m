@@ -16,7 +16,8 @@
 {
     // Override point for customization after application launch.
     // TODO Navigation
-    BjitNavigatorRoot *navigator = [[BjitNavigatorRoot alloc]init:CONTROLLER_START];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    BjitNavigatorRoot *navigator = [[BjitNavigatorRoot alloc] init];
     self.window.rootViewController = navigator;
     [self.window makeKeyAndVisible];
     return YES;

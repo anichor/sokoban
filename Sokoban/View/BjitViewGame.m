@@ -47,7 +47,7 @@
     return self;
 }
 
-- (id)init:(NSInteger)index :(NSObject<BjitProtocolAlert> *)protocolAlert
+- (id)init:(NSInteger)gameLevel :(NSObject<BjitProtocolAlert> *)protocolAlert
 {
     self = [super init];
 
@@ -57,7 +57,7 @@
 
     self.protocolAlertRoot = protocolAlert;
 
-    self.gameIndex = index - 1;
+    self.gameIndex = gameLevel;
     self.gameLevel = [self.gameLevels getLevelMaps:self.gameIndex];
     noOfVerticalTiles = [self.gameLevel count];
     NSString *row = [self.gameLevel objectAtIndex:0];

@@ -13,8 +13,9 @@
 
 @interface BjitNavigatorRoot : UINavigationController<BjitProtocolNavigator>
 
-@property (nonatomic, weak) BjitViewControllerRoot *controller;
+@property (nonatomic, assign) NSInteger nextControllerIndex;
+@property (nonatomic, assign) NSInteger previousControllerIndex;
 
-- (id)init:(NSInteger) controllerId;
+- (id)init;
 
 @end
