@@ -12,7 +12,6 @@
 #define SCALE_FACTOR_STEPPER 1.6
 #define POINT_Y_STEPPER_START 50
 #define HEIGHT_LABEL 40
-#define TAG_LABEL 30
 
 @interface BjitViewControllerStart ()
 
@@ -90,7 +89,7 @@
             [buttons addObject:@"OK"];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_MICROBAN_INDEX]];
-            [self showAlert:@"Select":@"\n\n\n\n\n":buttons:ids:0:COUNT_MICROBAN];
+            [self showAlert:@"Select Microban":@"\n\n\n\n\n":buttons:ids:0:COUNT_MICROBAN];
         }
             break;
         case DIALOG_ORIGINAL:
@@ -99,7 +98,7 @@
             [buttons addObject:@"OK"];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_ORIGINAL_INDEX]];
-            [self showAlert:@"Select":@"\n\n\n\n\n":buttons:ids:COUNT_MICROBAN:COUNT_ORIGINAL];
+            [self showAlert:@"Select Original":@"\n\n\n\n\n":buttons:ids:COUNT_MICROBAN:COUNT_ORIGINAL];
         }
             break;
         case DIALOG_MAS_SASQUATCH:
@@ -108,7 +107,7 @@
             [buttons addObject:@"OK"];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_MAS_SASQUATCH_INDEX]];
-            [self showAlert:@"Select":@"\n\n\n\n\n":buttons:ids:COUNT_ORIGINAL:COUNT_MAS_SASQUATCH];
+            [self showAlert:@"Select Mas-Sasquatch":@"\n\n\n\n\n":buttons:ids:COUNT_ORIGINAL:COUNT_MAS_SASQUATCH];
         }
             break;
         case DIALOG_SASQUATCH:
@@ -117,7 +116,7 @@
             [buttons addObject:@"OK"];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
             [ids addObject:[NSString stringWithFormat:@"%d", ID_SASQUATCH_INDEX]];
-            [self showAlert:@"Select":@"\n\n\n\n\n":buttons:ids:COUNT_MAS_SASQUATCH:COUNT_SASQUATCH];
+            [self showAlert:@"Select Sasquatch":@"\n\n\n\n\n":buttons:ids:COUNT_MAS_SASQUATCH:COUNT_SASQUATCH];
         }
             break;
         default:
@@ -181,40 +180,6 @@
             }
         }
     }
-}
-
-- (NSInteger)getGameIndex:(NSInteger)stepEnd
-{
-    NSInteger gameIndex = 0;
-    if (self.alert) {
-        NSArray *views = self.alert.subviews;
-        NSInteger count = views.count;
-        for (NSInteger i = 0; i < count; i++) {
-            UIView *view = [views objectAtIndex:i];
-            if (view.tag == TAG_LABEL) {
-                UILabel *label = (UILabel *)view;
-                gameIndex = label.text.integerValue - 1;
-                break;
-            }
-        }
-    }
-    
-    switch (stepEnd) {
-        case COUNT_MICROBAN:
-            break;
-        case COUNT_ORIGINAL:
-            gameIndex += COUNT_MICROBAN;
-            break;
-        case COUNT_MAS_SASQUATCH:
-            gameIndex += COUNT_ORIGINAL;
-            break;
-        case COUNT_SASQUATCH:
-            gameIndex += COUNT_MAS_SASQUATCH;
-            break;
-        default:
-            break;
-    }
-    return gameIndex;
 }
 
 - (void)hideAlert:(NSInteger) id

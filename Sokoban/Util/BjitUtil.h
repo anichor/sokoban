@@ -47,6 +47,8 @@
 #define KEY_GAME_INDEX @"KEY_GAME_INDEX"
 #define KEY_GAME @"KEY_GAME"
 
+#define TAG_LABEL 30
+
 @interface BjitUtil : NSObject
 
 void testFunction();

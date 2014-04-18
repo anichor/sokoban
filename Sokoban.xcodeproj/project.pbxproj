@@ -45,7 +45,6 @@
 		CEFE5E6718FF63900010A9A8 /* BjitGameState.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5E6618FF63900010A9A8 /* BjitGameState.m */; };
 		CEFE5E6C18FF73770010A9A8 /* SokobanGameState.java in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5E6918FF73770010A9A8 /* SokobanGameState.java */; };
 		CEFE5E6D18FF73770010A9A8 /* SokobanGameView.java in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5E6A18FF73770010A9A8 /* SokobanGameView.java */; };
-		CEFE5E6E18FF73770010A9A8 /* SokobanLevels.java in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5E6B18FF73770010A9A8 /* SokobanLevels.java */; };
 		CEFE5E7718FFC9280010A9A8 /* BjitNavigatorRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFE5E7618FFC9280010A9A8 /* BjitNavigatorRoot.m */; };
 /* End PBXBuildFile section */
 
@@ -109,7 +108,6 @@
 		CEFE5E6618FF63900010A9A8 /* BjitGameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BjitGameState.m; path = Sokoban/Util/BjitGameState.m; sourceTree = "<group>"; };
 		CEFE5E6918FF73770010A9A8 /* SokobanGameState.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; name = SokobanGameState.java; path = Sokoban/Util/SokobanGameState.java; sourceTree = "<group>"; };
 		CEFE5E6A18FF73770010A9A8 /* SokobanGameView.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; name = SokobanGameView.java; path = Sokoban/Util/SokobanGameView.java; sourceTree = "<group>"; };
-		CEFE5E6B18FF73770010A9A8 /* SokobanLevels.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; name = SokobanLevels.java; path = Sokoban/Util/SokobanLevels.java; sourceTree = "<group>"; };
 		CEFE5E7318FFABDD0010A9A8 /* BjitProtocolAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BjitProtocolAlert.h; path = Sokoban/Protocol/BjitProtocolAlert.h; sourceTree = "<group>"; };
 		CEFE5E7518FFC9280010A9A8 /* BjitNavigatorRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BjitNavigatorRoot.h; path = Sokoban/Navigator/BjitNavigatorRoot.h; sourceTree = "<group>"; };
 		CEFE5E7618FFC9280010A9A8 /* BjitNavigatorRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BjitNavigatorRoot.m; path = Sokoban/Navigator/BjitNavigatorRoot.m; sourceTree = "<group>"; };
@@ -281,7 +279,6 @@
 			children = (
 				CEFE5E6918FF73770010A9A8 /* SokobanGameState.java */,
 				CEFE5E6A18FF73770010A9A8 /* SokobanGameView.java */,
-				CEFE5E6B18FF73770010A9A8 /* SokobanLevels.java */,
 			);
 			name = Unnecessary;
 			sourceTree = "<group>";
@@ -420,7 +417,6 @@
 				CEFE5E7718FFC9280010A9A8 /* BjitNavigatorRoot.m in Sources */,
 				CEFE5E6718FF63900010A9A8 /* BjitGameState.m in Sources */,
 				CEFE5E6C18FF73770010A9A8 /* SokobanGameState.java in Sources */,
-				CEFE5E6E18FF73770010A9A8 /* SokobanLevels.java in Sources */,
 				CEFC329718FD03E20037C1BE /* BjitUtil.m in Sources */,
 				CEFE5E5918FE65830010A9A8 /* BjitViewControllerGame.m in Sources */,
 				CEFE5E5C18FF57CD0010A9A8 /* BjitGameLevels.m in Sources */,

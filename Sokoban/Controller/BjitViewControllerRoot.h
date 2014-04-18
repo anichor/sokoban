@@ -27,5 +27,6 @@
 - (void)hideAlert;
 - (void)setUserDefaults:(NSString *)userKey :(NSInteger)userValue;
 - (NSInteger)getUserDefaults:(NSString *)userKey;
+- (NSInteger)getGameIndex:(NSInteger)stepEnd;
 
 @end

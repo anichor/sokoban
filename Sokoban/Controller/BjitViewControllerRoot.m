@@ -182,17 +182,52 @@
             break;
         case ID_GAME_LEVEL_NEW:
         {
-            alert = nil;
             [self hideAlert:ID_GAME_LEVEL_NEW];
+            alert = nil;
         }
             break;
         case ID_SETTINGS:
-            alert = nil;
-            [self hideAlert:ID_SETTINGS];
+            exit(0);
+//            alert = nil;
+//            [self hideAlert:ID_SETTINGS];
             break;
         default:
             break;
     }
+}
+
+- (NSInteger)getGameIndex:(NSInteger)stepEnd
+{
+    NSInteger gameIndex = 0;
+    if (self.alert) {
+        NSArray *views = self.alert.subviews;
+        NSInteger count = views.count;
+        for (NSInteger i = 0; i < count; i++) {
+            UIView *view = [views objectAtIndex:i];
+            if (view.tag == TAG_LABEL) {
+                UILabel *label = (UILabel *)view;
+                gameIndex = label.text.integerValue - 1;
+                break;
+            }
+        }
+    }
+    
+    switch (stepEnd) {
+        case COUNT_MICROBAN:
+            break;
+        case COUNT_ORIGINAL:
+            gameIndex += COUNT_MICROBAN;
+            break;
+        case COUNT_MAS_SASQUATCH:
+            gameIndex += COUNT_ORIGINAL;
+            break;
+        case COUNT_SASQUATCH:
+            gameIndex += COUNT_MAS_SASQUATCH;
+            break;
+        default:
+            break;
+    }
+    return gameIndex;
 }
 
 - (void)setUserDefaults:(NSString *)userKey :(NSInteger)userValue
