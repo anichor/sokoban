@@ -134,7 +134,6 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y + POINT_Y_STEPPER_START, stepper.frame.size.width * SCALE_FACTOR_STEPPER, HEIGHT_LABEL)];
     label.textAlignment = NSTextAlignmentCenter;
-    // TODO get last non fixed game from UserDefault
     [label setText:[NSString stringWithFormat:@"%d", self.gameLevel - stepStart + 1]];
     label.tag = TAG_LABEL;
     [self.alert addSubview:label];
@@ -170,20 +169,19 @@
             NSInteger dialogId = 0;
             if (self.gameLevel + 1 < COUNT_SASQUATCH) {
                 self.gameLevel = self.gameLevel + 1;
-
-                if (self.gameLevel < COUNT_MICROBAN) {
-                    self.game = ID_MICROBAN;
-                    dialogId = DIALOG_MICROBAN;
-                } else if (self.gameLevel < COUNT_ORIGINAL) {
-                    self.game = ID_ORIGINAL;
-                    dialogId = DIALOG_ORIGINAL;
-                } else if (self.gameLevel < COUNT_MAS_SASQUATCH) {
-                    self.game = ID_MAS_SASQUATCH;
-                    dialogId = DIALOG_MAS_SASQUATCH;
-                } else if (self.gameLevel < COUNT_SASQUATCH) {
-                    self.game = ID_SASQUATCH;
-                    dialogId = DIALOG_SASQUATCH;
-                }
+            }
+            if (self.gameLevel < COUNT_MICROBAN) {
+                self.game = ID_MICROBAN;
+                dialogId = DIALOG_MICROBAN;
+            } else if (self.gameLevel < COUNT_ORIGINAL) {
+                self.game = ID_ORIGINAL;
+                dialogId = DIALOG_ORIGINAL;
+            } else if (self.gameLevel < COUNT_MAS_SASQUATCH) {
+                self.game = ID_MAS_SASQUATCH;
+                dialogId = DIALOG_MAS_SASQUATCH;
+            } else if (self.gameLevel < COUNT_SASQUATCH) {
+                self.game = ID_SASQUATCH;
+                dialogId = DIALOG_SASQUATCH;
             }
 
             [self setUserDefaults:KEY_GAME_INDEX :self.gameLevel];

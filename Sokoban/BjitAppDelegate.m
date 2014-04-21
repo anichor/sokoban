@@ -15,7 +15,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    // TODO Navigation
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     BjitNavigatorRoot *navigator = [[BjitNavigatorRoot alloc] init];
     self.window.rootViewController = navigator;
@@ -25,8 +24,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // TODO Navigate
-    // TODO Handle application cycle
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -39,8 +36,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // TODO Navigate
-    // TODO Handle application cycle
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

@@ -154,7 +154,6 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y + POINT_Y_STEPPER_START, stepper.frame.size.width * SCALE_FACTOR_STEPPER, HEIGHT_LABEL)];
     label.textAlignment = NSTextAlignmentCenter;
-    // TODO get last non fixed game from UserDefault
     [label setText:[NSString stringWithFormat:@"%d", 1]];
     label.tag = TAG_LABEL;
     [self.alert addSubview:label];

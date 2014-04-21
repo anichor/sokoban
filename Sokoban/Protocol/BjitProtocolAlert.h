@@ -8,6 +8,7 @@
 
 // TODO Use & Implement as a library using C-compiler for many platform support
 
+
 #import <Foundation/Foundation.h>
 
 @protocol BjitProtocolAlert <NSObject>

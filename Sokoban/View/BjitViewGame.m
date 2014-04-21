@@ -13,12 +13,25 @@
 #define CHAR_OUTSIDE '\''
 #define CHAR_WALL '#'
 #define CHAR_TARGET '.'
-#define CHAR_MAN_ON_TARGET '+'
-#define CHAR_MAN_ON_FLOOR '@'
+#define CHAR_MAN_ON_TARGET '+' //
+#define CHAR_MAN_ON_FLOOR '@'   //
 #define CHAR_FLOOR ' '
 #define CHAR_DIAMOND_ON_TARGET '*'
 #define CHAR_DIAMOND_ON_FLOOR '$'
 #define tileSize 30
+
+@interface Position : NSObject
+{
+}
+@property (nonatomic, assign) NSInteger x;
+@property (nonatomic, assign) NSInteger y;
+
+@end
+
+@implementation Position
+@synthesize x;
+@synthesize y;
+@end
 
 @implementation BjitViewGame
 
@@ -35,7 +48,7 @@
 @synthesize noOfHorizontalTiles;
 @synthesize startX;
 @synthesize startY;
-@synthesize testInteger;
+@synthesize position;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -43,6 +56,26 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:1.0f];
+
+        UISwipeGestureRecognizer *gestureLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondToSwipe:)];
+        [gestureLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+        gestureLeft.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:gestureLeft];
+
+        UISwipeGestureRecognizer *gestureRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondToSwipe:)];
+        [gestureRight setDirection:UISwipeGestureRecognizerDirectionRight];
+        gestureRight.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:gestureRight];
+
+        UISwipeGestureRecognizer *gestureUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondToSwipe:)];
+        [gestureUp setDirection:UISwipeGestureRecognizerDirectionUp];
+        gestureUp.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:gestureUp];
+
+        UISwipeGestureRecognizer *gestureDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondToSwipe:)];
+        [gestureDown setDirection:UISwipeGestureRecognizerDirectionDown];
+        gestureDown.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:gestureDown];
     }
     return self;
 }
@@ -97,7 +130,8 @@
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     self.startX = (screenSize.size.width - noOfHorizontalTiles * tileSize) / 2;
     self.startY = (screenSize.size.height - noOfVerticalTiles * tileSize) / 2;
-    
+
+    self.position = [[Position alloc] init];
 }
 
 - (NSInteger)getVerticalTilesNo
@@ -137,9 +171,13 @@
                     image = wallBitmap;
                     break;
                 case CHAR_MAN_ON_FLOOR:
+                    self.position.x = j;
+                    self.position.y = i;
                     image = manOnFloorBitmap;
                     break;
                 case CHAR_MAN_ON_TARGET:
+                    self.position.x = j;
+                    self.position.y = i;
                     image = manOnTargetBitmap;
                     break;
                 case CHAR_FLOOR:
@@ -165,17 +203,25 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesEnded:touches withEvent:event];
-	
+
 	UITouch* touch = ([touches count] == 1 ? [touches anyObject] : nil);
-	
+
 	if (touch)
 	{
-        testInteger++;
-        if (testInteger > 10) {
-            if (self.protocolAlertRoot) {
-                [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
-            }
-        }
+    }
+}
+
+- (void)respondToSwipe:(UISwipeGestureRecognizer *)recognizer {
+
+    NSInteger dir = recognizer.direction;
+    if ((dir & UISwipeGestureRecognizerDirectionDown) == UISwipeGestureRecognizerDirectionDown) {
+//            [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
+    } else if ((dir & UISwipeGestureRecognizerDirectionLeft) == UISwipeGestureRecognizerDirectionLeft) {
+//            [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
+    } else if ((dir & UISwipeGestureRecognizerDirectionRight) == UISwipeGestureRecognizerDirectionRight) {
+//            [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
+    } else if ((dir & UISwipeGestureRecognizerDirectionUp) == UISwipeGestureRecognizerDirectionUp) {
+            [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
     }
 }
 @end

@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BjitProtocolAlert.h"
 
+@class Position;
+
 @class BjitGameLevels;
 
-@interface BjitViewGame : UIView
+@interface BjitViewGame : UIView <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSObject<BjitProtocolAlert> *protocolAlertRoot;
 
@@ -26,13 +28,13 @@
 
 @property (nonatomic, strong) BjitGameLevels* gameLevels;
 @property (nonatomic, strong) NSArray* gameLevel;
+
 @property (nonatomic, assign) NSInteger gameIndex;
 @property (nonatomic, assign) NSInteger noOfVerticalTiles;
 @property (nonatomic, assign) NSInteger noOfHorizontalTiles;
 @property (nonatomic, assign) NSInteger startX;
 @property (nonatomic, assign) NSInteger startY;
-
-@property (nonatomic, assign) NSInteger testInteger;
+@property (nonatomic, strong) Position *position;
 
 - (id)init:(NSInteger) gameLevel :(NSObject<BjitProtocolAlert> *)protocolAlert;
 - (void)initData:(NSInteger)gameLevel;
