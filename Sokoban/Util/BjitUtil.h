@@ -25,6 +25,10 @@
 #define ID_SETTINGS 14
 #define ID_GAME_LEVEL_CLEAR 15
 #define ID_GAME_LEVEL_NEW 16
+#define ID_GAME_LEVEL_STATE 17
+#define ID_GAME_UNDO 18
+#define ID_GAME_DESIGN_BJIT 19
+#define ID_GAME_DESIGN_MP 20
 
 #define DIALOG_START 103
 #define DIALOG_ABOUT 104
@@ -33,6 +37,7 @@
 #define DIALOG_ORIGINAL 107
 #define DIALOG_MAS_SASQUATCH 108
 #define DIALOG_SASQUATCH 109
+#define DIALOG_GAME_STATE 110
 #define DIALOG_SETTINGS 114
 
 #define CONTROLLER_NONE 200
@@ -46,8 +51,20 @@
 
 #define KEY_GAME_INDEX @"KEY_GAME_INDEX"
 #define KEY_GAME @"KEY_GAME"
+#define KEY_GAME_DESIGN_INDEX @"KEY_GAME_DESIGN_INDEX"
 
 #define TAG_LABEL 30
+
+#define CHAR_OUTSIDE '\''
+#define CHAR_WALL '#'
+#define CHAR_TARGET '.'
+#define CHAR_MAN_ON_TARGET '+'
+#define CHAR_MAN_ON_FLOOR '@'
+#define CHAR_FLOOR ' '
+#define CHAR_IMAGE_ON_TARGET '*'
+#define CHAR_IMAGE_ON_FLOOR '$'
+
+#define GAME_TILE_MAPS 3
 
 @interface BjitUtil : NSObject
 

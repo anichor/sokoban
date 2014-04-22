@@ -16,6 +16,7 @@
 
 @property (nonatomic, assign) NSInteger gameLevel;
 @property (nonatomic, assign) NSInteger game;
+@property (nonatomic, assign) NSInteger gameDesign;
 @property (nonatomic, strong) BjitViewGame *gameView;
 
 @end

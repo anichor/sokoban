@@ -186,10 +186,30 @@
             alert = nil;
         }
             break;
+        case ID_GAME_UNDO:
+        {
+            [self hideAlert:ID_GAME_UNDO];
+            alert = nil;
+        }
+            break;
         case ID_SETTINGS:
-            exit(0);
-//            alert = nil;
-//            [self hideAlert:ID_SETTINGS];
+        {
+//            exit(0);
+            alert = nil;
+            [self hideAlert:ID_SETTINGS];
+        }
+            break;
+        case ID_GAME_DESIGN_BJIT:
+        {
+            alert = nil;
+            [self hideAlert:ID_GAME_DESIGN_BJIT];
+        }
+            break;
+        case ID_GAME_DESIGN_MP:
+        {
+            alert = nil;
+            [self hideAlert:ID_GAME_DESIGN_MP];
+        }
             break;
         default:
             break;

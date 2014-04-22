@@ -37,7 +37,8 @@
     self.selfControllerIndex = CONTROLLER_GAME;
     self.gameLevel = [self getUserDefaults:KEY_GAME_INDEX];
     self.game = [self getUserDefaults:KEY_GAME];
-    self.gameView = [[BjitViewGame alloc] init:self.gameLevel:(NSObject<BjitProtocolAlert> *)self];
+    self.gameDesign = [self getUserDefaults:KEY_GAME_DESIGN_INDEX];
+    self.gameView = [[BjitViewGame alloc] init:self.gameLevel:self.gameDesign:(NSObject<BjitProtocolAlert> *)self];
     [self.view addSubview:self.gameView];
 
     return self;
@@ -98,6 +99,17 @@
             [self showAlert:@"Select Sasquatch":@"\n\n\n\n\n":buttons:ids:COUNT_MAS_SASQUATCH:COUNT_SASQUATCH];
         }
             break;
+        case DIALOG_GAME_STATE:
+        {
+            [buttons addObject:@"Undo Move"];
+            [buttons addObject:@"New Game"];
+            [buttons addObject:@"Exit"];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_GAME_UNDO]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
+            [self showAlert:@"Sokoban" :nil :buttons :ids];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_EXIT]];
+        }
+            break;
         default:
             break;
     }
@@ -114,8 +126,6 @@
                       otherButtonTitles:nil, nil];
     }
     
-    //    [alert convertPoint:alert.center fromView:alert.superview];
-    //    stepper.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     UIStepper *stepper = [[UIStepper alloc] init];
     stepper.transform = CGAffineTransformMakeScale(SCALE_FACTOR_STEPPER, SCALE_FACTOR_STEPPER);
     NSInteger x = abs(([[UIScreen mainScreen] bounds].size.width - stepper.frame.size.width + stepper.frame.origin.x)) / 2;
@@ -134,7 +144,7 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y + POINT_Y_STEPPER_START, stepper.frame.size.width * SCALE_FACTOR_STEPPER, HEIGHT_LABEL)];
     label.textAlignment = NSTextAlignmentCenter;
-    [label setText:[NSString stringWithFormat:@"%d", self.gameLevel - stepStart + 1]];
+    [label setText:[NSString stringWithFormat:@"%ld", (long) (self.gameLevel - stepStart + 1)]];
     label.tag = TAG_LABEL;
     [self.alert addSubview:label];
     
@@ -205,6 +215,13 @@
 
             [self.gameView initData:self.gameLevel];
             [self.gameView setNeedsDisplay];
+            break;
+        case ID_GAME_LEVEL_STATE:
+        {
+            [self showAlert:DIALOG_GAME_STATE];
+        }
+            break;
+        case ID_GAME_UNDO:
             break;
         default:
             break;

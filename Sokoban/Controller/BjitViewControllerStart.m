@@ -119,6 +119,15 @@
             [self showAlert:@"Select Sasquatch":@"\n\n\n\n\n":buttons:ids:COUNT_MAS_SASQUATCH:COUNT_SASQUATCH];
         }
             break;
+        case DIALOG_SETTINGS:
+            [buttons addObject:@"Bjit Design"];
+            [buttons addObject:@"Mobile Pearl Design"];
+            [buttons addObject:@"Back"];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_GAME_DESIGN_BJIT]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_GAME_DESIGN_MP]];
+            [ids addObject:[NSString stringWithFormat:@"%d", ID_CANCEL]];
+            [self showAlert:nil:@"Select Design\n":buttons:ids];
+            break;
         default:
             break;
     }
@@ -250,6 +259,15 @@
         }
             break;
         case ID_SETTINGS:
+            [self showAlert:DIALOG_SETTINGS];
+            break;
+        case ID_GAME_DESIGN_BJIT:
+            [self setUserDefaults:KEY_GAME_DESIGN_INDEX :ID_GAME_DESIGN_BJIT];
+            [self showAlert:DIALOG_START];
+            break;
+        case ID_GAME_DESIGN_MP:
+            [self setUserDefaults:KEY_GAME_DESIGN_INDEX :ID_GAME_DESIGN_MP];
+            [self showAlert:DIALOG_START];
             break;
         default:
             break;

@@ -8,47 +8,26 @@
 
 #import "BjitViewGame.h"
 #import "BjitGameLevels.h"
+#import "BjitGameState.h"
 #import "BjitUtil.h"
+#import "BjitPosition.h"
 
-#define CHAR_OUTSIDE '\''
-#define CHAR_WALL '#'
-#define CHAR_TARGET '.'
-#define CHAR_MAN_ON_TARGET '+' //
-#define CHAR_MAN_ON_FLOOR '@'   //
-#define CHAR_FLOOR ' '
-#define CHAR_DIAMOND_ON_TARGET '*'
-#define CHAR_DIAMOND_ON_FLOOR '$'
 #define tileSize 30
-
-@interface Position : NSObject
-{
-}
-@property (nonatomic, assign) NSInteger x;
-@property (nonatomic, assign) NSInteger y;
-
-@end
-
-@implementation Position
-@synthesize x;
-@synthesize y;
-@end
 
 @implementation BjitViewGame
 
 @synthesize protocolAlertRoot;
-@synthesize diamondOnFloorBitmap;
-@synthesize diamondOnTargetBitmap;
+@synthesize imageOnFloorBitmap;
+@synthesize imageOnTargetBitmap;
 @synthesize floorBitmap;
 @synthesize outsideBitmap;
 @synthesize targetBitmap;
 @synthesize wallBitmap;
 @synthesize manOnFloorBitmap;
 @synthesize manOnTargetBitmap;
-@synthesize noOfVerticalTiles;
-@synthesize noOfHorizontalTiles;
 @synthesize startX;
 @synthesize startY;
-@synthesize position;
+@synthesize isRunning;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -76,11 +55,15 @@
         [gestureDown setDirection:UISwipeGestureRecognizerDirectionDown];
         gestureDown.numberOfTouchesRequired = 1;
         [self addGestureRecognizer:gestureDown];
+
+        UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTap:)];
+        gestureTap.numberOfTapsRequired = 2;
+        [self addGestureRecognizer:gestureTap];
     }
     return self;
 }
 
-- (id)init:(NSInteger)gameLevel :(NSObject<BjitProtocolAlert> *)protocolAlert
+- (id)init:(NSInteger)gameLevel :(NSInteger)gameDesign :(NSObject<BjitProtocolAlert> *)protocolAlert
 {
     self = [super init];
 
@@ -88,33 +71,63 @@
         self.gameLevels = [[BjitGameLevels alloc] init];
     }
 
+    if (!self.gameState) {
+        self.gameState = [[BjitGameState alloc] init];
+    }
+
     self.protocolAlertRoot = protocolAlert;
 
-    if (!diamondOnFloorBitmap) {
-        diamondOnFloorBitmap = [UIImage imageNamed:@"diamond_on_floor_96.png"];
+    if (gameDesign == ID_GAME_DESIGN_BJIT) {
+        if (!self.imageOnFloorBitmap) {
+            self.imageOnFloorBitmap = [UIImage imageNamed:@"bjit_on_floor_96.png"];
+        }
+        if (!self.imageOnTargetBitmap) {
+            self.imageOnTargetBitmap = [UIImage imageNamed:@"bjit_on_target_96.png"];
+        }
+        if (!floorBitmap) {
+            floorBitmap = [UIImage imageNamed:@"bjit_floor_96.png"];
+        }
+        if (!outsideBitmap) {
+            outsideBitmap = [UIImage imageNamed:@"bjit_outside_96.png"];
+        }
+        if (!targetBitmap) {
+            targetBitmap = [UIImage imageNamed:@"bjit_target_96.png"];
+        }
+        if (!wallBitmap) {
+            wallBitmap = [UIImage imageNamed:@"bjit_wall_96.png"];
+        }
+        if (!manOnFloorBitmap) {
+            manOnFloorBitmap = [UIImage imageNamed:@"bjit_man_on_floor_96.png"];
+        }
+        if (!manOnTargetBitmap) {
+            manOnTargetBitmap = [UIImage imageNamed:@"bjit_man_on_target_96.png"];
+        }
+    } else if (gameDesign == ID_GAME_DESIGN_MP) {
+        if (!self.imageOnFloorBitmap) {
+            self.imageOnFloorBitmap = [UIImage imageNamed:@"mp_on_floor_96.png"];
+        }
+        if (!self.imageOnTargetBitmap) {
+            self.imageOnTargetBitmap = [UIImage imageNamed:@"mp_on_target_96.png"];
+        }
+        if (!floorBitmap) {
+            floorBitmap = [UIImage imageNamed:@"mp_floor_96.png"];
+        }
+        if (!outsideBitmap) {
+            outsideBitmap = [UIImage imageNamed:@"mp_outside_96.png"];
+        }
+        if (!targetBitmap) {
+            targetBitmap = [UIImage imageNamed:@"mp_target_96.png"];
+        }
+        if (!wallBitmap) {
+            wallBitmap = [UIImage imageNamed:@"mp_wall_96.png"];
+        }
+        if (!manOnFloorBitmap) {
+            manOnFloorBitmap = [UIImage imageNamed:@"mp_man_on_floor_96.png"];
+        }
+        if (!manOnTargetBitmap) {
+            manOnTargetBitmap = [UIImage imageNamed:@"mp_man_on_target_96.png"];
+        }
     }
-    if (!diamondOnTargetBitmap) {
-        diamondOnTargetBitmap = [UIImage imageNamed:@"diamond_on_target_96.png"];
-    }
-    if (!floorBitmap) {
-        floorBitmap = [UIImage imageNamed:@"floor_96.png"];
-    }
-    if (!outsideBitmap) {
-        outsideBitmap = [UIImage imageNamed:@"outside_96.png"];
-    }
-    if (!targetBitmap) {
-        targetBitmap = [UIImage imageNamed:@"target_96.png"];
-    }
-    if (!wallBitmap) {
-        wallBitmap = [UIImage imageNamed:@"wall_96.png"];
-    }
-    if (!manOnFloorBitmap) {
-        manOnFloorBitmap = [UIImage imageNamed:@"man_on_floor_96.png"];
-    }
-    if (!manOnTargetBitmap) {
-        manOnTargetBitmap = [UIImage imageNamed:@"man_on_target_96.png"];
-    }
-
     [self initData:gameLevel];
     return self;
 }
@@ -122,26 +135,13 @@
 - (void)initData:(NSInteger)gameLevel
 {
     self.gameIndex = gameLevel;
-    self.gameLevel = [self.gameLevels getLevelMaps:self.gameIndex];
-    noOfVerticalTiles = [self.gameLevel count];
-    NSString *row = [self.gameLevel objectAtIndex:0];
-    noOfHorizontalTiles = [row length];
+    [self.gameState initData:[self.gameLevels getLevelMaps:self.gameIndex]];
     
     CGRect screenSize = [[UIScreen mainScreen] bounds];
-    self.startX = (screenSize.size.width - noOfHorizontalTiles * tileSize) / 2;
-    self.startY = (screenSize.size.height - noOfVerticalTiles * tileSize) / 2;
+    self.startX = (screenSize.size.width - self.gameState.noOfHorizontalTiles * tileSize) / 2;
+    self.startY = (screenSize.size.height - self.gameState.noOfVerticalTiles * tileSize) / 2;
 
-    self.position = [[Position alloc] init];
-}
-
-- (NSInteger)getVerticalTilesNo
-{
-    return noOfVerticalTiles;
-}
-
-- (NSInteger)getHorizontalTilesNo
-{
-    return noOfHorizontalTiles;
+    isRunning = NO;
 }
 
 - (NSInteger)getTilesSize
@@ -152,52 +152,64 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    NSInteger xCoordinate;
-    NSInteger yCoordinate;
+    NSInteger xCoordinate = 0;
+    NSInteger yCoordinate = 0;
     NSString *row;
-    UIImage *image;
 
-    for (NSInteger i = 0; i < noOfVerticalTiles; i++) {
+    for (NSInteger i = 0; i < self.gameState.noOfVerticalTiles; i++) {
         yCoordinate = self.startY + i * tileSize;
-        row = [self.gameLevel objectAtIndex:i];
-        for (NSInteger j = 0; j < noOfHorizontalTiles; j++) {
+        row = [self.gameState.gameLevel objectAtIndex:i];
+        for (NSInteger j = 0; j < self.gameState.noOfHorizontalTiles; j++) {
             xCoordinate = self.startX + j * tileSize;
             char c = [row characterAtIndex:j];
-            switch (c) {
-                case CHAR_OUTSIDE:
-                    image = outsideBitmap;
-                    break;
-                case CHAR_WALL:
-                    image = wallBitmap;
-                    break;
-                case CHAR_MAN_ON_FLOOR:
-                    self.position.x = j;
-                    self.position.y = i;
-                    image = manOnFloorBitmap;
-                    break;
-                case CHAR_MAN_ON_TARGET:
-                    self.position.x = j;
-                    self.position.y = i;
-                    image = manOnTargetBitmap;
-                    break;
-                case CHAR_FLOOR:
-                    image = floorBitmap;
-                    break;
-                case CHAR_DIAMOND_ON_FLOOR:
-                    image = diamondOnFloorBitmap;
-                    break;
-                case CHAR_DIAMOND_ON_TARGET:
-                    image = diamondOnTargetBitmap;
-                    break;
-                case CHAR_TARGET:
-                    image = targetBitmap;
-                    break;
-                default:
-                    break;
-            }
-            [image drawInRect:CGRectMake(xCoordinate, yCoordinate, tileSize, tileSize)];
+            [self drawBitmap:c:xCoordinate:yCoordinate];
         }
     }
+
+    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(performCheck:) object:self.gameState];
+    [thread start];
+}
+
+- (void)performCheck:(BjitGameState *)state
+{
+    if ([state performCheck]) {
+        [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
+    }
+}
+
+- (void)drawBitmap:(char)c :(NSInteger)xCoordinate :(NSInteger)yCoordinate
+{
+    UIImage *image;
+
+    switch (c) {
+        case CHAR_OUTSIDE:
+            image = outsideBitmap;
+            break;
+        case CHAR_WALL:
+            image = wallBitmap;
+            break;
+        case CHAR_MAN_ON_FLOOR:
+            image = manOnFloorBitmap;
+            break;
+        case CHAR_MAN_ON_TARGET:
+            image = manOnTargetBitmap;
+            break;
+        case CHAR_FLOOR:
+            image = floorBitmap;
+            break;
+        case CHAR_IMAGE_ON_FLOOR:
+            image = imageOnFloorBitmap;
+            break;
+        case CHAR_IMAGE_ON_TARGET:
+            image = imageOnTargetBitmap;
+            break;
+        case CHAR_TARGET:
+            image = targetBitmap;
+            break;
+        default:
+            break;
+    }
+    [image drawInRect:CGRectMake(xCoordinate, yCoordinate, tileSize, tileSize)];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -211,17 +223,48 @@
     }
 }
 
-- (void)respondToSwipe:(UISwipeGestureRecognizer *)recognizer {
+- (void)respondToTap:(UITapGestureRecognizer *)recognizer
+{
+    [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_STATE];
+}
 
+- (void)respondToSwipe:(UISwipeGestureRecognizer *)recognizer
+{
     NSInteger dir = recognizer.direction;
     if ((dir & UISwipeGestureRecognizerDirectionDown) == UISwipeGestureRecognizerDirectionDown) {
-//            [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
+        if ([self.gameState performMove:UISwipeGestureRecognizerDirectionDown]) {
+            [self setNeedsDisplay];
+        }
+        if (self.gameState.isGameDone) {
+        } else if (self.gameState.isGaveOver) {
+            // Restart Level Dialog
+        }
     } else if ((dir & UISwipeGestureRecognizerDirectionLeft) == UISwipeGestureRecognizerDirectionLeft) {
-//            [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
+        if ([self.gameState performMove:UISwipeGestureRecognizerDirectionLeft]) {
+            [self setNeedsDisplay];
+        }
+        if (self.gameState.isGameDone) {
+        } else if (self.gameState.isGaveOver) {
+            // Restart Level Dialog
+        }
     } else if ((dir & UISwipeGestureRecognizerDirectionRight) == UISwipeGestureRecognizerDirectionRight) {
-//            [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
-    } else if ((dir & UISwipeGestureRecognizerDirectionUp) == UISwipeGestureRecognizerDirectionUp) {
+        if ([self.gameState performMove:UISwipeGestureRecognizerDirectionRight]) {
+            [self setNeedsDisplay];
+        }
+        if (self.gameState.isGameDone) {
             [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
+        } else if (self.gameState.isGaveOver) {
+            // Restart Level Dialog
+        }
+    } else if ((dir & UISwipeGestureRecognizerDirectionUp) == UISwipeGestureRecognizerDirectionUp) {
+        if ([self.gameState performMove:UISwipeGestureRecognizerDirectionUp]) {
+            [self setNeedsDisplay];
+        }
+        if (self.gameState.isGameDone) {
+            [self.protocolAlertRoot hideAlert:ID_GAME_LEVEL_CLEAR];
+        } else if (self.gameState.isGaveOver) {
+            // Restart Level Dialog
+        }
     }
 }
 @end
