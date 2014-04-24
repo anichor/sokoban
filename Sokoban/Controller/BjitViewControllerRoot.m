@@ -254,6 +254,7 @@
 {
     NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
     [preferences setInteger:userValue forKey:userKey];
+    [preferences synchronize];
 }
 
 - (NSInteger)getUserDefaults:(NSString *)userKey

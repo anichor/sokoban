@@ -37,7 +37,12 @@
     self.selfControllerIndex = CONTROLLER_GAME;
     self.gameLevel = [self getUserDefaults:KEY_GAME_INDEX];
     self.game = [self getUserDefaults:KEY_GAME];
-    self.gameDesign = [self getUserDefaults:KEY_GAME_DESIGN_INDEX];
+    NSInteger design = [self getUserDefaults:KEY_GAME_DESIGN_INDEX];
+    if (design == 0) {
+        design = ID_GAME_DESIGN_BJIT;
+        [self setUserDefaults:KEY_GAME_DESIGN_INDEX :ID_GAME_DESIGN_BJIT];
+    }
+    self.gameDesign = design;
     self.gameView = [[BjitViewGame alloc] init:self.gameLevel:self.gameDesign:(NSObject<BjitProtocolAlert> *)self];
     [self.view addSubview:self.gameView];
 

@@ -27,6 +27,8 @@
 @synthesize manOnTargetBitmap;
 @synthesize startX;
 @synthesize startY;
+@synthesize centerX;
+@synthesize centerY;
 @synthesize isRunning;
 
 - (id)initWithFrame:(CGRect)frame
@@ -140,7 +142,7 @@
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     self.startX = (screenSize.size.width - self.gameState.noOfHorizontalTiles * tileSize) / 2;
     self.startY = (screenSize.size.height - self.gameState.noOfVerticalTiles * tileSize) / 2;
-
+    // self.centerX =
     isRunning = NO;
 }
 
