@@ -31,8 +31,14 @@
 @property (nonatomic, assign) NSInteger gameIndex;
 @property (nonatomic, assign) NSInteger startX;
 @property (nonatomic, assign) NSInteger startY;
+@property (nonatomic, assign) NSInteger drawX;
+@property (nonatomic, assign) NSInteger drawY;
 @property (nonatomic, assign) NSInteger centerX;
 @property (nonatomic, assign) NSInteger centerY;
+@property (nonatomic, assign) NSInteger playerX;
+@property (nonatomic, assign) NSInteger playerY;
+@property (nonatomic, assign) NSInteger direction;
+@property (nonatomic, assign) BOOL fitsOnScreen;
 @property (nonatomic, assign) BOOL isRunning;
 
 - (id)init:(NSInteger) gameLevel :(NSInteger)gameDesign :(NSObject<BjitProtocolAlert> *)protocolAlert;

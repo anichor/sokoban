@@ -29,6 +29,12 @@
 @synthesize startY;
 @synthesize centerX;
 @synthesize centerY;
+@synthesize playerX;
+@synthesize playerY;
+@synthesize fitsOnScreen;
+@synthesize direction;
+@synthesize drawX;
+@synthesize drawY;
 @synthesize isRunning;
 
 - (id)initWithFrame:(CGRect)frame
@@ -140,15 +146,56 @@
     [self.gameState initData:[self.gameLevels getLevelMaps:self.gameIndex]];
     
     CGRect screenSize = [[UIScreen mainScreen] bounds];
+    self.centerX = screenSize.size.width / 2;
+    self.centerY = screenSize.size.height / 2;
+    
     self.startX = (screenSize.size.width - self.gameState.noOfHorizontalTiles * tileSize) / 2;
     self.startY = (screenSize.size.height - self.gameState.noOfVerticalTiles * tileSize) / 2;
-    // self.centerX =
+    if (self.startX < 0 || self.startY < 0) {
+        fitsOnScreen = NO;
+    } else {
+        fitsOnScreen = YES;
+    }
+
+    drawX = startX;
+    drawY = startY;
     isRunning = NO;
+    NSString * test = @"dfvfdvfdvfdvfdvfv";
+    test rep
 }
 
 - (NSInteger)getTilesSize
 {
     return tileSize;
+}
+
+// TODO Calculatev Start Point Of Game From Center Point Of Screen
+- (void)setPlayerOnCenter
+{
+    if (fitsOnScreen) {
+        return;
+    }
+
+    if ((direction == UISwipeGestureRecognizerDirectionUp && (playerY - tileSize <= 0))
+        || (direction == UISwipeGestureRecognizerDirectionDown && (playerY + tileSize * 2 >= self.centerY * 2))
+        ) {
+        drawY = startY;
+        // Transform Start To Center
+        NSInteger newSY = - (-drawY);
+        // Transform Man
+        NSInteger newPosY = newSY + tileSize * self.gameState.position.y + tileSize / 2;
+        // Transform Start Y Again
+        drawY = - (newPosY - centerY);
+    }
+    if ((direction == UISwipeGestureRecognizerDirectionLeft && (playerX - tileSize <= 0))
+        || (direction == UISwipeGestureRecognizerDirectionRight && (playerX + tileSize * 2 >= self.centerX * 2))
+        ) {
+        drawX = startX;
+        NSInteger newSX = - (-drawX);
+        NSInteger newPosX = newSX + tileSize * self.gameState.position.x + tileSize / 2;
+        drawX = - (newPosX - centerX);
+    }
+    
 }
 
 - (void)drawRect:(CGRect)rect
@@ -158,12 +205,18 @@
     NSInteger yCoordinate = 0;
     NSString *row;
 
+    [self setPlayerOnCenter];
+
     for (NSInteger i = 0; i < self.gameState.noOfVerticalTiles; i++) {
-        yCoordinate = self.startY + i * tileSize;
+        yCoordinate = drawY + i * tileSize;
         row = [self.gameState.gameLevel objectAtIndex:i];
         for (NSInteger j = 0; j < self.gameState.noOfHorizontalTiles; j++) {
-            xCoordinate = self.startX + j * tileSize;
+            xCoordinate = drawX + j * tileSize;
             char c = [row characterAtIndex:j];
+            if (c == CHAR_MAN_ON_FLOOR || c == CHAR_MAN_ON_TARGET) {
+                playerX = xCoordinate;
+                playerY = yCoordinate;
+            }
             [self drawBitmap:c:xCoordinate:yCoordinate];
         }
     }
@@ -232,8 +285,8 @@
 
 - (void)respondToSwipe:(UISwipeGestureRecognizer *)recognizer
 {
-    NSInteger dir = recognizer.direction;
-    if ((dir & UISwipeGestureRecognizerDirectionDown) == UISwipeGestureRecognizerDirectionDown) {
+    direction = recognizer.direction;
+    if ((direction & UISwipeGestureRecognizerDirectionDown) == UISwipeGestureRecognizerDirectionDown) {
         if ([self.gameState performMove:UISwipeGestureRecognizerDirectionDown]) {
             [self setNeedsDisplay];
         }
@@ -241,7 +294,7 @@
         } else if (self.gameState.isGaveOver) {
             // Restart Level Dialog
         }
-    } else if ((dir & UISwipeGestureRecognizerDirectionLeft) == UISwipeGestureRecognizerDirectionLeft) {
+    } else if ((direction & UISwipeGestureRecognizerDirectionLeft) == UISwipeGestureRecognizerDirectionLeft) {
         if ([self.gameState performMove:UISwipeGestureRecognizerDirectionLeft]) {
             [self setNeedsDisplay];
         }
@@ -249,7 +302,7 @@
         } else if (self.gameState.isGaveOver) {
             // Restart Level Dialog
         }
-    } else if ((dir & UISwipeGestureRecognizerDirectionRight) == UISwipeGestureRecognizerDirectionRight) {
+    } else if ((direction & UISwipeGestureRecognizerDirectionRight) == UISwipeGestureRecognizerDirectionRight) {
         if ([self.gameState performMove:UISwipeGestureRecognizerDirectionRight]) {
             [self setNeedsDisplay];
         }
@@ -258,7 +311,7 @@
         } else if (self.gameState.isGaveOver) {
             // Restart Level Dialog
         }
-    } else if ((dir & UISwipeGestureRecognizerDirectionUp) == UISwipeGestureRecognizerDirectionUp) {
+    } else if ((direction & UISwipeGestureRecognizerDirectionUp) == UISwipeGestureRecognizerDirectionUp) {
         if ([self.gameState performMove:UISwipeGestureRecognizerDirectionUp]) {
             [self setNeedsDisplay];
         }
